@@ -33,3 +33,7 @@ Tüm sistem contract-first çalışmak zorundadır. Sistemdeki herhangi bir web 
 ## 4) PLANLAMA VE ÇALIŞMA DÖNGÜSÜ
 
 Verilen her promptta dosya düzenlemeden/eklemeden önce tüm dosya değişiklik dökümünü ver. Kullanıcı ONAYLAMADAN asla bir değişiklik yapma. Her promptta bu kural net bir şekilde geçerlidir.
+
+## 5) UYDURMA YOK (NO INVENTING)
+
+Herhangi bir konuda bir karar vermen gerektiğinde DUR ve kullanıcıya sor. Kesinlikle hiç bir kararı uydurma durumu söz konusu olamaz.
