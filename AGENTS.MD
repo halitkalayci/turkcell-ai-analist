@@ -28,3 +28,8 @@ Bu e-ticaret mikroservis projesinde yalnızca aşağıdaki servisler bulunmak zo
 ## 3) CONTRACT-FIRST YAKLAŞIM
 
 Tüm sistem contract-first çalışmak zorundadır. Sistemdeki herhangi bir web servisi oluşturulurken/güncellenirken o sistemdeki `docs/contracts` altından okunmalı, contract yoksa DUR ve kullanıcıyı uyar.
+
+
+## 4) PLANLAMA VE ÇALIŞMA DÖNGÜSÜ
+
+Verilen her promptta dosya düzenlemeden/eklemeden önce tüm dosya değişiklik dökümünü ver. Kullanıcı ONAYLAMADAN asla bir değişiklik yapma. Her promptta bu kural net bir şekilde geçerlidir.
