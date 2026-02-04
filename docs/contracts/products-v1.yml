@@ -14,3 +14,195 @@ servers:
     description: Development Server
   - url: https://api.turkcell.com.tr
     description: Production Server
+
+paths:
+  /products:
+    post:
+      summary: Yeni ürün oluştur
+      description: |
+        Yeni bir ürün oluşturur.
+        
+        **Kurallar:**
+        - İsim 2-150 karakter arasında olmalıdır
+        - İsim sadece boşluklardan oluşamaz
+        - İsim başında ve sonunda boşluk olamaz
+        - Aynı isimde başka bir ürün zaten mevcut olmamalıdır
+        - Fiyat 0 veya daha büyük olmalıdır
+        - Para birimi sadece ₺ veya $ olabilir
+      operationId: createProduct
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+            examples:
+              validProduct:
+                summary: Geçerli ürün örneği
+                value:
+                  name: "iPhone 15 Pro"
+                  price: 45999.99
+                  currency: "₺"
+      responses:
+        '201':
+          description: Ürün başarıyla oluşturuldu
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+              examples:
+                createdProduct:
+                  summary: Oluşturulan ürün
+                  value:
+                    id: "123e4567-e89b-12d3-a456-426614174000"
+                    name: "iPhone 15 Pro"
+                    price: 45999.99
+                    currency: "₺"
+        '400':
+          description: Geçersiz istek - Validasyon hatası
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidName:
+                  summary: Geçersiz isim
+                  value:
+                    timestamp: "2026-02-04T10:30:00Z"
+                    status: 400
+                    error: "Bad Request"
+                    message: "İsim 2-150 karakter arasında olmalıdır"
+                    path: "/api/v1/products"
+                nameWithSpaces:
+                  summary: Sadece boşluklardan oluşan isim
+                  value:
+                    timestamp: "2026-02-04T10:30:00Z"
+                    status: 400
+                    error: "Bad Request"
+                    message: "İsim sadece boşluklardan oluşamaz"
+                    path: "/api/v1/products"
+                invalidPrice:
+                  summary: Negatif fiyat
+                  value:
+                    timestamp: "2026-02-04T10:30:00Z"
+                    status: 400
+                    error: "Bad Request"
+                    message: "Fiyat 0 veya daha büyük olmalıdır"
+                    path: "/api/v1/products"
+                invalidCurrency:
+                  summary: Geçersiz para birimi
+                  value:
+                    timestamp: "2026-02-04T10:30:00Z"
+                    status: 400
+                    error: "Bad Request"
+                    message: "Para birimi sadece ₺ veya $ olabilir"
+                    path: "/api/v1/products"
+        '409':
+          description: Çakışma - Aynı isimde ürün zaten mevcut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                duplicateName:
+                  summary: Duplicate ürün ismi
+                  value:
+                    timestamp: "2026-02-04T10:30:00Z"
+                    status: 409
+                    error: "Conflict"
+                    message: "Bu isimde bir ürün zaten mevcut"
+                    path: "/api/v1/products"
+
+components:
+  schemas:
+    CreateProductRequest:
+      type: object
+      required:
+        - name
+        - price
+        - currency
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          pattern: '^(?!\s*$)\S.*\S$|^\S$'
+          description: |
+            Ürün adı. 
+            - 2-150 karakter arasında olmalıdır
+            - Sadece boşluklardan oluşamaz
+            - Başında ve sonunda boşluk olamaz
+          example: "iPhone 15 Pro"
+        price:
+          type: number
+          format: double
+          minimum: 0.0
+          description: Ürün fiyatı (0 veya daha büyük olmalıdır)
+          example: 45999.99
+        currency:
+          type: string
+          enum:
+            - "₺"
+            - "$"
+          description: Para birimi (sadece ₺ veya $)
+          example: "₺"
+    
+    ProductResponse:
+      type: object
+      required:
+        - id
+        - name
+        - price
+        - currency
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Ürün benzersiz kimliği
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        name:
+          type: string
+          description: Ürün adı
+          example: "iPhone 15 Pro"
+        price:
+          type: number
+          format: double
+          description: Ürün fiyatı
+          example: 45999.99
+        currency:
+          type: string
+          description: Para birimi
+          example: "₺"
+    
+    ErrorResponse:
+      type: object
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+        - path
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Hatanın oluştuğu zaman (ISO 8601 formatında)
+          example: "2026-02-04T10:30:00Z"
+        status:
+          type: integer
+          description: HTTP durum kodu
+          example: 400
+        error:
+          type: string
+          description: HTTP durum açıklaması
+          example: "Bad Request"
+        message:
+          type: string
+          description: Hata mesajı
+          example: "İsim 2-150 karakter arasında olmalıdır"
+        path:
+          type: string
+          description: İstek yapılan endpoint
+          example: "/api/v1/products"
