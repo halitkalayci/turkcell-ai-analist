@@ -9,7 +9,7 @@
 
 - Java 17+
 - Spring BOOT 3.X
-- PostgreSQL
+- H2 In-Memory
 
 ### 1.2) FRONTEND TEKNOLOJİLERİ
 
