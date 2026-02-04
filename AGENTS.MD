@@ -37,3 +37,8 @@ Verilen her promptta dosya düzenlemeden/eklemeden önce tüm dosya değişiklik
 ## 5) UYDURMA YOK (NO INVENTING)
 
 Herhangi bir konuda bir karar vermen gerektiğinde DUR ve kullanıcıya sor. Kesinlikle hiç bir kararı uydurma durumu söz konusu olamaz.
+
+## 6) ÇIKTI FORMATI
+
+- Kesinlikle hiç bir emoji kullanma.
+- Kurumsal resmi bir dil tercih et.
