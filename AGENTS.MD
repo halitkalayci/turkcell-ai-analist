@@ -7,4 +7,10 @@
 
 ### 1.1) BACKEND TEKNOLOJİLERİ
 
-- Java 17+, Spring BOOT 3.X
+- Java 17+
+- Spring BOOT 3.X
+
+### 1.2) FRONTEND TEKNOLOJİLERİ
+
+- Nodejs
+- React
