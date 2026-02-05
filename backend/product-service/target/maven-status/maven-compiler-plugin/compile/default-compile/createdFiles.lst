@@ -1,0 +1,17 @@
+com\turkcell\productservice\dto\ErrorResponse.class
+com\turkcell\productservice\service\ProductService.class
+com\turkcell\productservice\validation\ProductNameValidator.class
+com\turkcell\productservice\dto\PagedProductResponse.class
+com\turkcell\productservice\config\CorsConfig.class
+com\turkcell\productservice\config\OpenApiConfig.class
+com\turkcell\productservice\controller\ProductController.class
+com\turkcell\productservice\validation\ValidCurrency.class
+com\turkcell\productservice\validation\ValidProductName.class
+com\turkcell\productservice\dto\ProductResponse.class
+com\turkcell\productservice\ProductServiceApplication.class
+com\turkcell\productservice\validation\CurrencyValidator.class
+com\turkcell\productservice\dto\CreateProductRequest.class
+com\turkcell\productservice\exception\DuplicateProductException.class
+com\turkcell\productservice\repository\ProductRepository.class
+com\turkcell\productservice\exception\GlobalExceptionHandler.class
+com\turkcell\productservice\model\Product.class
