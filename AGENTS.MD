@@ -15,6 +15,7 @@
 
 - Nodejs
 - React
+- Vite
 
 ## 2) SERVİSLER
 

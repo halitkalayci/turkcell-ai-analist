@@ -21,7 +21,7 @@ public class OpenApiConfig {
                                 "Bu kalıpların dışına çıkılamaz.")
                         .version("1.0.0"))
                 .servers(List.of(
-                        new Server().url("http://localhost:8080/api/v1").description("Development Server"),
+                        new Server().url("http://localhost:8080").description("Development Server"),
                         new Server().url("https://api.turkcell.com.tr").description("Production Server")
                 ));
     }
