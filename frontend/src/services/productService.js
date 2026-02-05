@@ -35,6 +35,20 @@ const productService = {
     } catch (error) {
       throw error.response?.data || error;
     }
+  },
+
+  /**
+   * Ürün detayını getirir
+   * @param {string} id - Ürün UUID'si
+   * @returns {Promise} ProductResponse
+   */
+  getProductById: async (id) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/products/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
   }
 };
 

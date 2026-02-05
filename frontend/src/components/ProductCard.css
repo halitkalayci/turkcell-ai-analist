@@ -48,3 +48,25 @@
   font-family: monospace;
   word-break: break-all;
 }
+
+.view-details-button {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-details-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.view-details-button:active {
+  transform: translateY(0);
+}

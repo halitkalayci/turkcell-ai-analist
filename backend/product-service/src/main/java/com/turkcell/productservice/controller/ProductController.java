@@ -90,6 +90,62 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    @Operation(
+            summary = "Ürün detayını getir",
+            description = """
+                    Belirtilen ID'ye sahip ürünün detayını getirir.
+                    
+                    **Kurallar:**
+                    - ID geçerli bir UUID formatında olmalıdır
+                    - Ürün sistemde mevcut olmalıdır
+                    """
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ürün başarıyla getirildi",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ProductResponse.class),
+                            examples = @ExampleObject(
+                                    name = "productDetail",
+                                    summary = "Ürün detayı",
+                                    value = """
+                                            {
+                                              "id": "123e4567-e89b-12d3-a456-426614174000",
+                                              "name": "iPhone 15 Pro",
+                                              "price": 45999.99,
+                                              "currency": "₺"
+                                            }
+                                            """
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Geçersiz istek - UUID formatı hatalı",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Ürün bulunamadı",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            )
+    })
+    public ResponseEntity<ProductResponse> getProductById(
+            @Parameter(description = "Ürün UUID'si", example = "123e4567-e89b-12d3-a456-426614174000")
+            @PathVariable String id) {
+        ProductResponse product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
+
     @PostMapping
     @Operation(
             summary = "Yeni ürün oluştur",

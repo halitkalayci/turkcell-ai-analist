@@ -4,6 +4,7 @@ import com.turkcell.productservice.dto.CreateProductRequest;
 import com.turkcell.productservice.dto.PagedProductResponse;
 import com.turkcell.productservice.dto.ProductResponse;
 import com.turkcell.productservice.exception.DuplicateProductException;
+import com.turkcell.productservice.exception.ProductNotFoundException;
 import com.turkcell.productservice.model.Product;
 import com.turkcell.productservice.repository.ProductRepository;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,6 +68,26 @@ public class ProductService {
                 productPage.getTotalPages(),
                 productPage.getTotalElements(),
                 productPage.getSize()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ProductResponse getProductById(String id) {
+        UUID uuid;
+        try {
+            uuid = UUID.fromString(id);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Geçersiz UUID formatı");
+        }
+
+        Product product = productRepository.findById(uuid.toString())
+                .orElseThrow(() -> new ProductNotFoundException("Ürün bulunamadı"));
+
+        return new ProductResponse(
+                product.getId().toString(),
+                product.getName(),
+                product.getPrice(),
+                product.getCurrency()
         );
     }
 

@@ -170,6 +170,73 @@ paths:
                     error: "Conflict"
                     message: "Bu isimde bir ürün zaten mevcut"
                     path: "/api/v1/products"
+  
+  /products/{id}:
+    get:
+      summary: Ürün detayını getir
+      description: |
+        Belirtilen ID'ye sahip ürünün detayını getirir.
+        
+        **Kurallar:**
+        - ID geçerli bir UUID formatında olmalıdır
+        - Ürün sistemde mevcut olmalıdır
+      operationId: getProductById
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          description: Ürün UUID'si
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+      responses:
+        '200':
+          description: Ürün başarıyla getirildi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+              examples:
+                productDetail:
+                  summary: Ürün detayı
+                  value:
+                    id: "123e4567-e89b-12d3-a456-426614174000"
+                    name: "iPhone 15 Pro"
+                    price: 45999.99
+                    currency: "₺"
+        '400':
+          description: Geçersiz istek - UUID formatı hatalı
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidUUID:
+                  summary: Geçersiz UUID formatı
+                  value:
+                    timestamp: "2026-02-05T10:30:00Z"
+                    status: 400
+                    error: "Bad Request"
+                    message: "Geçersiz UUID formatı"
+                    path: "/api/v1/products/invalid-uuid"
+        '404':
+          description: Ürün bulunamadı
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                productNotFound:
+                  summary: Ürün bulunamadı
+                  value:
+                    timestamp: "2026-02-05T10:30:00Z"
+                    status: 404
+                    error: "Not Found"
+                    message: "Ürün bulunamadı"
+                    path: "/api/v1/products/123e4567-e89b-12d3-a456-426614174000"
 
 components:
   schemas:

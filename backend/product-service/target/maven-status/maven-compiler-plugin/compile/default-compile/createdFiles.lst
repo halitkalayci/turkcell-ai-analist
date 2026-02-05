@@ -13,5 +13,6 @@ com\turkcell\productservice\validation\CurrencyValidator.class
 com\turkcell\productservice\dto\CreateProductRequest.class
 com\turkcell\productservice\exception\DuplicateProductException.class
 com\turkcell\productservice\repository\ProductRepository.class
+com\turkcell\productservice\exception\ProductNotFoundException.class
 com\turkcell\productservice\exception\GlobalExceptionHandler.class
 com\turkcell\productservice\model\Product.class
