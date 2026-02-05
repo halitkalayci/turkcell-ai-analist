@@ -43,3 +43,12 @@ Herhangi bir konuda bir karar vermen gerektiğinde DUR ve kullanıcıya sor. Kes
 
 - Kesinlikle hiç bir emoji kullanma.
 - Kurumsal resmi bir dil tercih et.
+- Değişikliklerden etkilenen servisler, bu servislerin gerekli ise
+restart terminal komutları.
+
+## 7) ÇALIŞTIRMA VE DEBUGGING
+
+- Her değişiklik sonrası o değişikliklerin etkilendiği uygulamaları listele, bu uygulamaları durdurup-yeniden başlatmak gerekiyor mu? Bunları raporla. Eğer gerekiyorsa o uygulama için yazılacak tüm terminal
+komutlarını sırayla ver.
+
+- Kendi başına asla çalıştırma amaçlı terminal komutu çalıştırma.
